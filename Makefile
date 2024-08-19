@@ -1,6 +1,6 @@
 # Need to be modified according to different users
-BOOST_LIB_PATH=../boost_1_77_0
-OPENCL_LIB_PATH=/usr/local/cuda
+BOOST_LIB_PATH=$$CONDA_PREFIX
+OPENCL_LIB_PATH=$$CUDA_HOME
 OPENCL_VERSION=-DOPENCL_3_0
 GPU_PLATFORM=-DNVIDIA_PLATFORM
 
@@ -8,11 +8,11 @@ GPU_PLATFORM=-DNVIDIA_PLATFORM
 BOOST_INC_PATH=-I$(BOOST_LIB_PATH) -I$(BOOST_LIB_PATH)/boost 
 VINA_GPU_INC_PATH=-I./lib -I./OpenCL/inc 
 OPENCL_INC_PATH=-I$(OPENCL_LIB_PATH)/include
-LIB1=-lboost_program_options -lboost_system -lboost_filesystem -lOpenCL
+LIB1=-lboost_program_options -lboost_system -lboost_filesystem -lOpenCL -lboost_thread
 LIB2=-lstdc++
 LIB3=-lm -lpthread
 LIB_PATH=-L$(BOOST_LIB_PATH)/stage/lib -L$(OPENCL_LIB_PATH)/lib64
-SRC=./lib/*.cpp ./OpenCL/src/wrapcl.cpp $(BOOST_LIB_PATH)/libs/thread/src/pthread/thread.cpp $(BOOST_LIB_PATH)/libs/thread/src/pthread/once.cpp #../boost_1_77_0/boost/filesystem/path.hpMACRO=-DAMD_PLATFORM -DDISPLAY_SUCCESS -DDISPLAY_ADDITION_INFO
+SRC=./lib/*.cpp ./OpenCL/src/wrapcl.cpp
 MACRO=$(OPENCL_VERSION) $(GPU_PLATFORM) #-DDISPLAY_SUCCESS -DDISPLAY_ADDITION_INFO
 all:out
 out:./main/main.cpp
